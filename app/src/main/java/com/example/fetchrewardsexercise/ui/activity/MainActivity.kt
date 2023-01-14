@@ -49,6 +49,7 @@ class MainActivity : AppCompatActivity() {
 
         val searchView = binding.searchView
         val searchList = NameObject()
+        searchView.setIconifiedByDefault(false)
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
@@ -60,7 +61,7 @@ class MainActivity : AppCompatActivity() {
 
                 searchList.clear()
                 for(i in completeList){
-                    if (i.name?.contains(newText.toString()) == true || i.listId.toString().contains(newText.toString())){
+                    if (i.name?.contains(newText.toString() , true) == true || i.listId.toString().contains(newText.toString())){
                         searchList.add(i)
                     }
                 }
