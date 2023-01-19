@@ -1,12 +1,13 @@
 package com.example.fetchrewardsexercise.repository
 
+import android.app.Application
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.example.fetchrewards.models.NameObject
 import com.example.fetchrewards.models.NameObjectItem
 import com.example.fetchrewardsexercise.api.FetchNameService
 
-class NameRepository(val fetchNameService: FetchNameService)  {
+class NameRepository(val fetchNameService: FetchNameService , val app_context : Application)  {
 
     val nameLiveData = MutableLiveData<NameObject>()
 

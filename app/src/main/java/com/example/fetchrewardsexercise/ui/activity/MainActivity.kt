@@ -1,19 +1,21 @@
 package com.example.fetchrewardsexercise.ui.activity
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
+import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
-import androidx.lifecycle.ViewModelProvider
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fetchrewards.models.NameObject
 import com.example.fetchrewardsexercise.R
-import com.example.fetchrewardsexercise.api.FetchNameHelper
-import com.example.fetchrewardsexercise.api.FetchNameService
 import com.example.fetchrewardsexercise.databinding.ActivityMainBinding
-import com.example.fetchrewardsexercise.repository.NameRepository
 import com.example.fetchrewardsexercise.ui.recyclerview.MainRvAdapter
+import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.lifecycle.HiltViewModel
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
@@ -58,9 +60,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupRecyclerView(){
         val myRv= binding.rewardsRecyclerView
-        val fetchNameService = FetchNameHelper.getInstance().create(FetchNameService::class.java)
-        val repository = NameRepository(fetchNameService)
-        val mainViewModel = ViewModelProvider(this , MainViewModelFactory(repository)).get(MainViewModel::class.java)
+
+        val mainViewModel : MainViewModel by viewModels()
+
+
         mainViewModel.names.observe(this){
             mainRvAdapter = MainRvAdapter(dataSet = it)
             completeList = it
