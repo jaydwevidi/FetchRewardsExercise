@@ -26,8 +26,7 @@ object AppModule {
         return Retrofit.Builder()
             .baseUrl(baseURL).addConverterFactory(GsonConverterFactory.create())
             .build().create(FetchNameService::class.java)
-    }
-
+    }q
 
     @Provides
     @Singleton
